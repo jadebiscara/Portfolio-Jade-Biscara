@@ -1,0 +1,1096 @@
+    @font-face {
+    font-family: 'speakeasy';
+    src: url('fonts/speakeasy/OTF/Speakeasy-Script.otf');
+    }
+
+    @font-face {
+    font-family: 'mollie';
+    src: url('fonts/mollie_rocky/Mollie\ Rocky\ DEMO.ttf');
+    }
+
+    @font-face {
+      font-family: 'lato';
+      src: url('fonts/Lato/Lato-Regular.ttf');
+      }
+
+      .project-title {
+        font-family: 'Mollie', cursive; /* Utilisez 'Mollie' et une police de secours */
+        font-size: 2.2em; /* La taille désirée */
+        font-weight: bold; /* Ou normal, selon le style de Mollie */
+        color: white; /* La couleur désirée (ajustez si besoin pour le contraste) */
+        text-align: center; /* Centré, comme vous l'aviez pour le module 4 */
+        margin-top: 0; /* Supprime la marge par défaut en haut des titres */
+        margin-bottom: 1.5em; /* Ajoute un espacement sous le titre pour le séparer du premier paragraphe */
+        /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); si vous voulez un effet d'ombre */
+    }
+
+body {
+    background-color: #ffc0cb;
+    color: palevioletred; /* Optionnel */
+    /* Gardez les styles de base du body, mais pas l'image de fond ici */
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    /* Vous pourriez vouloir une couleur de fond pour le body si l'image n'est pas opaque */
+    /* background-color: #f0f0f0; */
+}
+
+/* Pour les écrans plus petits que 768px (tablettes et mobiles) */
+@media (max-width: 768px) {
+  .project-description-common {
+      width: 90%; /* Prend plus de place sur mobile */
+      left: 50%; /* Centre le bloc */
+      transform: translate(-50%, -50%); /* Centrage universel */
+      font-size: 0.9em; /* Texte un peu plus petit */
+      padding: 20px; /* Moins de padding */
+  }
+
+  /* Et adaptez la position pour chaque module si nécessaire */
+  .project-description-mod18 {
+      /* Peut-être pas de 'left' ou 'right' spécifique ici si .common gère le centrage */
+  }
+
+  /* Pour l'image fixe des onglets */
+  #fixed-overlay-image {
+      background-size: cover; /* Ou autre stratégie si 'contain' est trop petit sur mobile */
+      background-position: center bottom; /* Ou autre positionnement pour mobile */
+  }
+
+  /* Ajuster la taille des onglets si leur zone cliquable est trop petite/grande */
+  .clickable-tab {
+      width: 20%;
+      height: 10%;
+      /* Ajuster top/left pour chaque .tab-X si nécessaire */
+  }
+
+  /* Ajuster la taille des polices des titres qui sont très grands */
+  #mod1 .title {
+      font-size: 80pt; /* Ou une valeur en vw (ex: 10vw) ou plus petite */
+  }
+  #mod1 .subtitle, #mod1 .email {
+      font-size: 30px; /* Ou une valeur en vw */
+  }
+  .welcome-title {
+      font-size: 40px; /* Ou une valeur en vw */
+  }
+}
+
+/* Pour les très petits écrans (mobiles étroits) */
+@media (max-width: 480px) {
+  /* Encore plus d'ajustements si nécessaire */
+}
+
+#fixed-overlay-image {
+  position: fixed; /* Reste fixe par rapport à la fenêtre de visualisation */
+  top: 0;
+  left: 0;
+  width: 100vw; /* 100% de la largeur du viewport */
+  height: 100vh; /* 100% de la hauteur du viewport */
+  background-image: url('img/onglets.jpg'); /* Le chemin de votre image PNG */
+  background-size: contain;
+  background-position: center top; /* Centre l'image et l'aligne en haut */
+  background-repeat: no-repeat;
+  z-index: 9999; /* Valeur très élevée pour être au-dessus de tout le reste */
+  opacity: 1; /* L'image commence à 100% visible */
+  transition: opacity 0.5s ease-in-out; /* Ajoute une transition fluide à l'opacité */
+}
+
+/* Styles communs pour toutes les zones cliquables */
+.clickable-tab {
+  position: absolute; /* Positionne les onglets par rapport à #fixed-overlay-image */
+  display: block;    /* S'assure que les liens prennent bien la largeur et la hauteur */
+  z-index: 10000;    /* Plus élevé que l'image pour être cliquable */
+  cursor: pointer;   /* Indique que c'est cliquable */
+  pointer-events: auto; /* Permet les événements de souris sur ces éléments spécifiques */
+}
+
+/* Positionnement spécifique pour chaque onglet (à ajuster selon la forme réelle de vos onglets dans le PNG) */
+.tab-1 { /* Onglet en haut à gauche, renvoie vers #mod100 */
+  top: 2%; /* Ajustez cette valeur pour aligner verticalement */
+  left: 3%; /* Ajustez cette valeur pour aligner horizontalement */
+  width: 17%; /* Largeur de la zone cliquable */
+  height: 8%; /* Hauteur de la zone cliquable */
+}
+
+.tab-2 { /* 2ème onglet, renvoie vers #mod101 */
+  top: 2%;
+  left: 22%; /* Ajustez la position horizontale */
+  width: 17%;
+  height: 8%;
+}
+
+.tab-3 { /* 3ème onglet, renvoie vers #mod102 */
+  top: 2%;
+  left: 42%; /* Ajustez la position horizontale */
+  width: 17%;
+  height: 8%;
+}
+
+.tab-4 { /* 4ème onglet, renvoie vers #mod103 */
+  top: 2%;
+  left: 61%; /* Ajustez la position horizontale */
+  width: 17%;
+  height: 8%;
+}
+
+.tab-5 { /* 4ème onglet, renvoie vers #mod103 */
+  top: 2%;
+  left: 81%; /* Ajustez la position horizontale */
+  width: 17%;
+  height: 8%;
+}
+
+/* ------------------------------------------------------------- */
+/* Styles pour les modules de contenu (pour être visibles par-dessus l'image fixe) */
+/* ------------------------------------------------------------- */
+.module-content {
+  min-height: 100vh; /* Chaque module prend au moins la hauteur de l'écran */
+  width: 100%;
+  position: relative; /* Nécessaire pour que le z-index et le défilement fonctionnent correctement */
+  background-color: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent pour la lisibilité */
+  padding: 50px 20px; /* Padding interne pour le contenu */
+  box-sizing: border-box; /* Pour inclure le padding dans la largeur/hauteur totale */
+  z-index: 10; /* Assure que le contenu des modules est au-dessus du body mais en dessous des onglets fixes */
+  color: white; /* Couleur du texte par défaut pour les modules */
+  /* Vous pouvez ajouter d'autres styles spécifiques à vos modules ici (flexbox, etc.) */
+}
+
+/* Styles spécifiques pour #mod1 (s'il est aussi un .module-content) */
+#mod1 {
+  /* Vos styles spécifiques pour #mod1, sans l'arrière-plan de l'image */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Assurez-vous d'avoir une couleur de fond si vous voulez qu'elle soit opaque */
+  /* background-color: rgba(255, 255, 255, 0.8); */ /* Ou une couleur pleine */
+}
+
+/* Styles pour les titres et texte à l'intérieur des modules */
+.title {
+  font-size: 4em;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: palevioletred; /* Exemple: texte noir sur fond clair de module */
+  text-shadow: none; /* Enlevez l'ombre si le fond du module est opaque */
+}
+
+.subtitle {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.email {
+  font-size: 1.2em;
+  color: black;
+}
+
+/* ------------------------------------------------------------- */
+/* Styles pour le bandeau de transition (#mod20) */
+/* ------------------------------------------------------------- */
+#mod100 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px; /* Hauteur réduite pour le bandeau de transition */
+  overflow: hidden;
+  text-align: center;
+  z-index: 10; /* S'assure que le bandeau est au-dessus du body, mais sous les onglets fixes */
+  background-color: transparent; /* Si vous voulez voir l'image de fond derrière le bandeau */
+  /* Ou une couleur de fond spécifique si vous préférez */
+  /* background-color: palevioletred; */
+}
+
+#title100 {
+  color: black;
+  font-family: "vintage", sans-serif; /* Ajoutez une police de secours si "vintage" n'est pas chargée */
+  font-size: 80pt; /* Taille de police ajustée */
+  position: relative;
+  text-align: center;
+  display: flex;
+  animation: defile 10s linear infinite;
+  white-space: nowrap;
+  z-index: 1; /* Le z-index est relatif à #mod20 */
+  padding: 10px 0; /* Padding vertical pour le texte */
+}
+
+@keyframes defile {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+/* ------------------------------------------------------------- */
+/* Styles pour le bloc de texte de l'infographie (mod15) */
+/* ------------------------------------------------------------- */
+#mod15 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10; /* Assurez-vous que ce module est aussi au-dessus du body */
+  background-color: rgba(255, 255, 255, 0.8); /* Fond du module */
+}
+
+.project-description-mod15 {
+  position: absolute;
+  top: 50%;
+  left: 83%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  max-width: 800px;
+  padding: 30px;
+  background-color: #d86f92;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: 'lato', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+  z-index: 999; /* Valeur élevée pour être au-dessus de l'image de fond du module 15, mais en dessous des onglets fixes */
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.project-description-mod15 p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-mod15 p:last-child {
+  margin-bottom: 0;
+}
+
+/* ------------------------------------------------------------- */
+/* Styles pour le bloc de texte du magazine Slow Fashion (mod7) */
+/* ------------------------------------------------------------- */
+#mod7 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh; /* Utiliser min-height pour s'assurer que le contenu rentre */
+  position: relative; /* Important pour le positionnement interne */
+  z-index: 10; /* Au-dessus du body */
+  background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
+  padding: 20px 0; /* Padding global pour le module */
+}
+
+.project-description-mod7 {
+  width: 90%; /* Occupe 90% de la largeur du parent */
+  max-width: 900px; /* Mais ne dépasse pas 900 pixels */
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.9); /* Fond blanc presque opaque pour le bloc de texte */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  color: #333;
+  font-family: 'lato', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+  z-index: 1; /* Relatif à #mod7 */
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 90vh; /* Limite la hauteur du bloc de texte */
+}
+
+.project-description-mod7 p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-mod7 p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ------------------------------------------------------------- */
+/* Smooth scrolling pour les ancres */
+/* ------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+
+      /* Module 1 */
+
+  #mod1 {
+        background-image: url('img/chat.png');         
+        background-size: cover;          /* L'image couvrira tout l'espace du module */
+        background-position: center;     /* L'image sera centrée */
+        background-repeat: no-repeat;    /* Empêche l'image de se répéter */
+}
+
+     #mod1 .title{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%; 
+        text-align: center;
+        font-family: speakeasy;
+        font-size:200pt;
+        position:relative;
+        text-align:center;
+        line-height:1000px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Ombre pour améliorer la lisibilité du texte */
+      }
+    
+      #mod1 .subtitle {
+        position: absolute; /* Positionne le sous-titre de manière absolue */
+        bottom: 25px; /* Aligné en bas */
+        right: 25px; /* Aligné à droite */
+        text-align: right; /* Aligner le texte à droite si le conteneur est plus large */
+        padding: 5px; /* Un peu d'espace autour du texte */
+        font-size: 50px; /* Ajustez la taille de la police */
+        color: palevioletred; /* Ajustez la couleur du texte */
+        font-family: mollie;
+      }
+
+      #mod1 .email {
+      position: absolute; /* Positionne l'adresse e-mail de manière absolue */
+      bottom: 25px; /* Aligné avec le bas du sous-titre */
+      left: 25px; /* Positionné à 25px du bord gauche */
+      font-family: lato; /* Choisissez une police de caractères */
+      font-size: 30px; /* Taille de la police */
+      color: palevioletred; /* Couleur du texte */
+      padding: 5px; /* Un peu d'espacement autour du texte */
+      }
+
+
+/* Module 2 */
+      
+      #mod2 {
+        position: relative; /* Essentiel pour positionner les éléments internes */
+        width: 100%;
+        height: 100vh; /* Fait que le module occupe toute la hauteur de la fenêtre */
+        background-image: url('img/cv.png'); 
+        background-size: cover;          /* L'image couvrira tout l'espace du module */
+        background-position: center;     /* L'image sera centrée */
+        background-repeat: no-repeat;    /* Empêche l'image de se répéter */
+      }
+
+      
+      #mod2 .module-image img {
+        max-width: 50%;
+        height: auto;
+        display: block;
+      }
+
+      .cv-hotspot {
+        position: absolute; /* Permet de positionner cet élément précisément */
+        
+        /* --- C'EST ICI QUE VOUS DÉFINISSEZ LA POSITION ET LA TAILLE --- */
+        top: 75%;    /* Distance depuis le haut de #mod2 (ajustez cette valeur) */
+        left: 53%;   /* Distance depuis la gauche de #mod2 (ajustez cette valeur) */
+        width: 493px; /* Largeur de votre zone cliquable (ajustez cette valeur) */
+        height: 110px; /* Hauteur de votre zone cliquable (ajustez cette valeur) */
+        z-index: 10000; /* Place cette zone cliquable au-dessus de l'image de fond (qui est à z-index implicite 0) */
+        cursor: pointer; /* Change le curseur en pointeur pour indiquer que c'est cliquable */
+        text-decoration: none; /* Supprime le soulignement par défaut du lien */
+      }
+      
+      .welcome-title {
+        position: absolute; /* Positionné par rapport à .module-image */
+        top: 20%; /* Ajustez cette valeur pour placer le titre plus ou moins haut. */
+                  /* top: 20% place le haut du titre à 20% du haut de .module-image */
+                  /* (avant le translate) */
+        left: 58%; /* Mêmes valeurs que votre paragraphe pour l'alignement horizontal */
+        transform: translate(-50%, -50%); /* Centre le titre par rapport à son propre centre */
+        font-family: 'speakeasy'; /* Votre police personnalisée */
+        font-size: 60px;
+        color: palevioletred; /* Couleur du texte, ajustez si nécessaire */
+        white-space: nowrap; /* Empêche le texte de passer à la ligne */
+        /* Assurez-vous que le z-index est supérieur à celui de l'image de fond si vous en avez une */
+        z-index: 2; /* Un z-index plus élevé pour s'assurer qu'il est au-dessus de l'image */
+      }
+      
+      
+      #mod2 .module-image p {
+        position: absolute;
+        top: 45%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+        color: black;
+        font-size: 30px;
+        font-family: lato;
+        text-align: left;
+        width: 40%;
+        max-width: 500px;
+      }
+      
+/* Module 3 compétences*/
+#mod3 .module-image img {
+  width: 100%; /* Ajustez la largeur selon vos besoins */
+  height: auto; /* Maintient les proportions de l'image */
+  margin-right: 200px; /* Déplace l'image vers la droite */
+  display: block;
+}
+
+/* bandeaux */
+#mod100 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* Règle la hauteur pour une bande plus fine. Ajustez selon vos besoins. */
+  height: 100px; /* Exemple: une hauteur de 100px pour le bandeau */
+  overflow: hidden; /* Garde le contenu débordant masqué */
+  text-align: center; /* Centrage du texte si nécessaire (bien que flexbox gère déjà) */
+  /* background-color: #f0f0f0;  Optionnel: une couleur de fond pour le bandeau lui-même si vous voulez */
+}
+
+#title100 {
+  color: black;
+  font-family: "mollie", sans-serif; /* Ajoutez une police de secours */
+  font-size: 80pt; /* Diminuez la taille de la police pour qu'elle rentre mieux dans la hauteur réduite */
+  position: relative; /* Gardez cette position */
+  text-align: center;
+  display: flex;
+  animation: defile 10s linear infinite;
+  white-space: nowrap; /* Essentiel pour que le texte ne se coupe pas et défile */
+  z-index: 1;
+  /* Ajustez les marges ou le padding si le texte est trop près des bords verticaux du bandeau */
+  padding: 10px 0; /* Un peu de padding vertical pour le texte */
+}
+
+
+
+@keyframes defile {
+
+  from { transform: translateX(100%); }
+
+  to { transform: translateX(-100%); }  
+
+}
+
+
+/* Module 4 ordi */
+#mod4 {
+  position: relative; /* TRÈS IMPORTANT : Le conteneur #mod4 doit être positionné relative */
+  width: 100%;
+  height: 100vh; /* Le module prend toute la hauteur de la fenêtre visible */
+  overflow: hidden; /* Cache tout ce qui dépasse (y compris la vidéo si elle est plus grande) */
+  /* background-color: black; */ /* Optionnel : une couleur de fond au cas où la vidéo ne charge pas */
+}
+
+#mod4 .module-video-background { /* Nouvelle classe pour le conteneur de la vidéo */
+  position: absolute; /* Positionne le conteneur de la vidéo de manière absolue par rapport à #mod4 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Assure que la vidéo est en arrière-plan */
+}
+
+#mod4 .module-video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Recadre la vidéo pour couvrir entièrement le conteneur, sans la déformer */
+  display: block; /* Supprime l'espace sous la vidéo */
+}
+
+.project-description-mod4 {
+  position: absolute; /* Positionne ce texte par rapport à #mod4 */
+  top: 50%;           /* Centre verticalement par rapport au parent #mod4 */
+  left: 83%;          /* Centre horizontalement par rapport au parent #mod4 */
+  transform: translate(-50%, -50%); /* Ajuste le positionnement pour un vrai centrage */
+
+  width: 30%;         /* Largeur du bloc de texte */
+  max-width: 800px;   /* Largeur maximale pour éviter qu'il ne soit trop étiré sur grands écrans */
+  padding: 30px;      /* Espacement interne pour le texte */
+
+  background-color: pink;
+  border-radius: 12px; /* Bords légèrement arrondis */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombre légère pour le faire ressortir */
+
+  color: white;       
+  font-family: 'lato', sans-serif; 
+  font-size: 1.1em;  
+  line-height: 1.7;  
+  text-align: justify; 
+
+  z-index: 10000; /* Assure que le texte est au-dessus de l'image de fond (z-index: 0) */
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur/hauteur totale */
+
+  overflow-y: auto; /* Ajoute une barre de défilement verticale si le contenu dépasse max-height */
+  max-height: 80vh; /* Limite la hauteur du bloc de texte à 80% de la hauteur de la fenêtre */
+}
+
+/* Styles pour les paragraphes à l'intérieur de .project-description-mod4 */
+.project-description-mod4 p {
+  margin-bottom: 1.2em; /* Espacement entre les paragraphes */
+  text-indent: 1.5em; /* Optionnel : pour une indentation de la première ligne de chaque paragraphe */
+}
+
+/* Vous pouvez ajouter un style pour le dernier paragraphe s'il n'y a pas de marge après */
+.project-description-mod4 p:last-child {
+  margin-bottom: 0;
+}
+
+
+
+/* Module 5 */
+#mod5 {
+  position: relative; /* Essentiel pour positionner les éléments internes */
+  width: 100%;
+  height: 100vh; /* Le module occupe toute la hauteur de la fenêtre */
+  overflow: hidden; /* Important si le contenu dépasse */
+  /* Ajoutez une couleur de fond ou une image de fond ici si nécessaire */
+}
+
+#mod5 .module-image {
+  /* Si l'image doit servir de fond couvrant tout le module */
+  width: 100%;
+  height: 100%;
+}
+
+#mod5 .module-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0; /* L'image est en arrière-plan */
+}
+
+.project-description-mod5 {
+  position: absolute; /* Positionne le texte par rapport à #mod5 */
+  top: 50%;           /* Centre verticalement */
+  
+  /* --- NOUVEAU : Position à gauche --- */
+  left: 17%;          /* Décale le bloc plus à gauche. Ajustez cette valeur (ex: 30%, 25%) */
+  transform: translate(-50%, -50%); /* Centre le bloc par rapport à son propre centre et à la position 'left' */
+
+  /* --- LARGEUR AJUSTÉE --- */
+  width: 30%;         /* Largeur du bloc de texte. Ajustez selon vos besoins (ex: 45%, 40%) */
+  max-width: 600px;   /* Largeur maximale pour la lisibilité */
+
+  padding: 30px;
+  background-color: pink;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  color: white;
+  font-family: 'lato', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+
+  z-index: 10000; /* Le texte est au-dessus de l'image */
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 80vh; /* Limite la hauteur et ajoute une barre de défilement si nécessaire */
+}
+
+/* Styles pour les paragraphes à l'intérieur de .project-description-mod5 */
+.project-description-mod5 p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-mod5 p:last-child {
+  margin-bottom: 0;
+}
+
+/* Module 6 */
+#mod6 .module-image img {
+  width: 100%; /* Ajustez la largeur selon vos besoins */
+  height: auto; /* Maintient les proportions de l'image */
+  margin-right: 200px; /* Déplace l'image vers la droite */
+  display: block;
+}
+
+/* Module 7 texte mag*/ 
+#mod7 {
+  position: relative; /* Essentiel pour positionner les éléments internes */
+  width: 100%;
+  background-color: #ffc0cb;
+  height: 100vh; /* Le module occupe toute la hauteur de la fenêtre */
+  overflow: hidden; /* Important si le contenu dépasse */
+  display: flex; /* Utiliser flexbox pour centrer le contenu */
+  align-items: center; /* Centrer verticalement */
+  justify-content: center; /* Centrer horizontalement */
+  z-index: 10000;
+}
+
+.project-description-mod7 {
+  /* Pas besoin de 'position: absolute' ou 'transform' si on utilise flexbox sur #mod7 */
+  /* Si vous souhaitez qu'il "coulisse" ou se superpose, maintenez 'position: absolute' */
+  position: relative; /* Par défaut, gardons-le relatif pour qu'il soit un enfant flex */
+
+  width: 90%; /* Occupe une grande partie de la largeur du module */
+  padding: 40px; /* Plus de padding pour l'espace */
+  background-color: pink;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Ombre plus prononcée pour un effet de relief */
+
+  color: white;
+  font-family: 'lato', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+
+  z-index: 10000; /* Assure que le texte est bien visible */
+  box-sizing: border-box;
+  overflow-y: auto; /* Ajoute une barre de défilement si le contenu est trop long */
+  max-height: 90vh; /* Limite la hauteur du bloc de texte */
+}
+
+/* Styles pour les paragraphes à l'intérieur de .project-description-mod7 */
+.project-description-mod7 p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-mod7 p:last-child {
+  margin-bottom: 0;
+}
+
+/* Module 8 */
+#mod8 .module-image img {
+  width: 100%; /* Ajustez la largeur selon vos besoins */
+  height: auto; /* Maintient les proportions de l'image */
+  margin-right: 200px; /* Déplace l'image vers la droite */
+  display: block;
+}
+
+/* Module 9 */
+#mod9 .module-image img {
+  width: 100%; /* Ajustez la largeur selon vos besoins */
+  height: auto; /* Maintient les proportions de l'image */
+  margin-right: 200px; /* Déplace l'image vers la droite */
+  display: block;
+}
+
+
+/* Module 11 */
+#mod11 {
+  position: relative; /* Essentiel pour positionner les éléments internes */
+  width: 100%;
+  height: 100vh; /* Le module occupe toute la hauteur de la fenêtre */
+  overflow: hidden; /* Important si le contenu dépasse */
+  display: flex; /* Utiliser flexbox pour centrer le contenu */
+  align-items: center; /* Centrer verticalement */
+  justify-content: center; /* Centrer horizontalement */
+}
+
+.project-description-mod11 {
+  position: absolute; /* Positionne ce texte par rapport à #mod4 */
+  top: 50%;           /* Centre verticalement par rapport au parent #mod4 */
+  left: 83%;          /* Centre horizontalement par rapport au parent #mod4 */
+  transform: translate(-50%, -50%); /* Ajuste le positionnement pour un vrai centrage */
+
+  width: 30%;         /* Largeur du bloc de texte */
+  max-width: 800px;   /* Largeur maximale pour éviter qu'il ne soit trop étiré sur grands écrans */
+  padding: 30px;      /* Espacement interne pour le texte */
+
+  background-color: pink;
+  border-radius: 12px; /* Bords légèrement arrondis */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombre légère pour le faire ressortir */
+
+  color: white;       
+  font-family: 'lato', sans-serif; 
+  font-size: 1.1em;  
+  line-height: 1.7;  
+  text-align: justify; 
+
+  z-index: 10000; /* Assure que le texte est au-dessus de l'image de fond (z-index: 0) */
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur/hauteur totale */
+
+  overflow-y: auto; /* Ajoute une barre de défilement verticale si le contenu dépasse max-height */
+  max-height: 80vh; /* Limite la hauteur du bloc de texte à 80% de la hauteur de la fenêtre */
+}
+
+/* Styles pour les paragraphes à l'intérieur de .project-description-mod7 */
+.project-description-mod11 p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-mod11 p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* Module 12 */
+#mod12 .module-image img {
+  width: 100%; /* Ajustez la largeur selon vos besoins */
+  height: auto; /* Maintient les proportions de l'image */
+  margin-right: 200px; /* Déplace l'image vers la droite */
+  display: block;
+}
+
+
+
+
+/* Module 13 */
+/* --- Module 13 : Conteneur principal --- */
+#mod13 {
+  position: relative; /* INDISPENSABLE pour les éléments positionnés en absolu à l'intérieur */
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* Conservez ou ajoutez ici d'autres styles spécifiques à #mod13 si nécessaire */
+}
+
+/* --- Image dans le Module 13 --- */
+#mod13 .module-image img {
+  width: 100%;
+  height: auto;
+  margin-right: 200px; /* Ajustez ou supprimez si non désiré */
+  display: block;
+  max-width: 80%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+/* --- Zone de texte spécifique au Module 13 --- */
+/* (N'oubliez pas que cette div doit avoir la classe "project-description-common" EN PLUS dans votre HTML) */
+.project-description-mod13 {
+  position: absolute;
+  top: 50%;
+  left: 80%; /* Ajustez cette valeur pour positionner le texte à droite ou à gauche */
+  transform: translate(-50%, -50%);
+  width: 30%;
+  max-width: 600px;
+  /* Toutes les autres propriétés de style (couleur, fond, padding, police...)
+     doivent être définies dans la classe '.project-description-common'
+     et NON PAS ici. Supprimez-les si elles sont encore présentes dans cette règle. */
+}
+
+/* --- Styles communs à TOUTES les zones de texte descriptives --- */
+/* Cette règle devrait déjà être dans votre CSS. Elle centralise les styles partagés. */
+.project-description-common {
+  padding: 30px;
+  background-color: pink;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: 'lato', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+  z-index: 10000;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+/* --- Styles pour les paragraphes à l'intérieur des zones de texte communes --- */
+.project-description-common p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-common p:last-child {
+  margin-bottom: 0;
+}
+  
+
+
+
+/* Module 15 */
+#mod15 {
+  position: relative; /* Essentiel pour positionner les éléments internes */
+  width: 100%;
+  height: 100vh; /* Le module occupe toute la hauteur de la fenêtre */
+  overflow: hidden; /* Important si le contenu dépasse */
+  display: flex; /* Utiliser flexbox pour centrer le contenu */
+  align-items: center; /* Centrer verticalement */
+  justify-content: center; /* Centrer horizontalement */
+  z-index: 10000;
+  background-color: #ffc0cb;
+}
+
+.project-description-mod15 {
+  position: absolute; /* Positionne ce texte par rapport à #mod4 */
+  top: 50%;           /* Centre verticalement par rapport au parent #mod4 */
+  left:16%;          /* Centre horizontalement par rapport au parent #mod4 */
+  transform: translate(-50%, -50%); /* Ajuste le positionnement pour un vrai centrage */
+
+  width: 30%;         /* Largeur du bloc de texte */
+  max-width: 800px;   /* Largeur maximale pour éviter qu'il ne soit trop étiré sur grands écrans */
+  padding: 30px;      /* Espacement interne pour le texte */
+
+  background-color: pink;
+  border-radius: 12px; /* Bords légèrement arrondis */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombre légère pour le faire ressortir */
+
+  color: white;       
+  font-family: 'lato', sans-serif; 
+  font-size: 1.1em;  
+  line-height: 1.7;  
+  text-align: justify; 
+
+  z-index: 10000; /* Assure que le texte est au-dessus de l'image de fond (z-index: 0) */
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur/hauteur totale */
+
+  overflow-y: auto; /* Ajoute une barre de défilement verticale si le contenu dépasse max-height */
+  max-height: 80vh; /* Limite la hauteur du bloc de texte à 80% de la hauteur de la fenêtre */
+}
+
+/* Styles pour les paragraphes à l'intérieur de .project-description-mod7 */
+.project-description-mod15 p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-mod15 p:last-child {
+  margin-bottom: 0;
+}
+
+/* Module 16 */
+#mod16 {
+  position: relative; /* Essentiel pour positionner les éléments internes */
+  width: 100%;
+  height: 100vh; /* Le module occupe toute la hauteur de la fenêtre */
+  overflow: hidden; /* Important si le contenu dépasse */
+  display: flex; /* Utiliser flexbox pour centrer le contenu */
+  align-items: center; /* Centrer verticalement */
+  justify-content: center; /* Centrer horizontalement */
+}
+
+.project-description-mod16 {
+  position: absolute; /* Positionne le texte par rapport à #mod5 */
+  top: 50%;           /* Centre verticalement */
+  
+  /* --- NOUVEAU : Position à gauche --- */
+  Left: 83%;          /* Décale le bloc plus à gauche. Ajustez cette valeur (ex: 30%, 25%) */
+  transform: translate(-50%, -50%); /* Centre le bloc par rapport à son propre centre et à la position 'left' */
+
+  /* --- LARGEUR AJUSTÉE --- */
+  width: 30%;         /* Largeur du bloc de texte. Ajustez selon vos besoins (ex: 45%, 40%) */
+  max-width: 600px;   /* Largeur maximale pour la lisibilité */
+
+  padding: 30px;
+  background-color: pink;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  color: white;
+  font-family: 'lato', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+
+  z-index: 10000; /* Le texte est au-dessus de l'image */
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 80vh; /* Limite la hauteur et ajoute une barre de défilement si nécessaire */
+}
+
+/* Styles pour les paragraphes à l'intérieur de .project-description-mod5 */
+.project-description-mod16 p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-mod16 p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* Module 18 */
+/* --- Module 18 : Conteneur principal --- */
+#mod18 {
+  position: relative; /* ESSENTIEL ! Votre texte absolu se positionnera par rapport à ça. */
+  width: 100%;
+  height: 100vh; /* Le module occupe toute la hauteur de la fenêtre */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Conservez ou ajoutez ici d'autres styles spécifiques à #mod18 si nécessaire */
+}
+
+/* --- Zone de texte spécifique au Module 18 --- */
+/* Rappel HTML : Votre div de texte DOIT AVOIR CES DEUX classes :
+ <div class="project-description-common project-description-mod18"> ... </div>
+*/
+.project-description-mod18 {
+  position: absolute; /* Positionne ce texte par rapport à #mod18 */
+  top: 50%; /* Centre verticalement par rapport à #mod18 */
+  
+  /* Positionnement spécifique pour le module 18 (à gauche) */
+  left: 25%; /* Décale le bloc plus à gauche. Ajustez cette valeur. */
+  transform: translate(-50%, -50%); /* Centre le bloc sur le point (top, left) */
+
+  width: 30%; /* Largeur spécifique pour ce module */
+  max-width: 600px;
+  
+  /* IMPORTANT : Toutes les propriétés de style (padding, background-color, border-radius, etc.)
+     DOIVENT ÊTRE SUPPRIMÉES DE CETTE RÈGLE et se trouver uniquement dans '.project-description-common'. */
+}
+
+/* --- Styles communs à TOUTES les zones de texte descriptives --- */
+/* Cette règle DOIT contenir toutes les propriétés de style qui sont les mêmes pour tous vos modules de texte */
+/* Elle devrait déjà être dans votre CSS comme nous l'avons défini précédemment. */
+.project-description-common {
+  padding: 30px;
+  background-color: pink;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: 'lato', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+  z-index: 10000;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+/* Styles pour les paragraphes à l'intérieur des zones de texte communes */
+.project-description-common p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-common p:last-child {
+  margin-bottom: 0;
+}
+
+/* Module 19 */
+#mod19 {
+  position: relative; /* ESSENTIEL ! Votre texte absolu se positionnera par rapport à ça. */
+  width: 100%;
+  height: 100vh; /* Le module occupe toute la hauteur de la fenêtre */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Conservez ou ajoutez ici d'autres styles spécifiques à #mod18 si nécessaire */
+}
+
+/* --- Zone de texte spécifique au Module 18 --- */
+/* Rappel HTML : Votre div de texte DOIT AVOIR CES DEUX classes :
+ <div class="project-description-common project-description-mod18"> ... </div>
+*/
+.project-description-mod19 {
+  position: absolute; /* Positionne ce texte par rapport à #mod18 */
+  top: 50%; /* Centre verticalement par rapport à #mod18 */
+  
+  /* Positionnement spécifique pour le module 18 (à gauche) */
+  left: 75%; /* Décale le bloc plus à gauche. Ajustez cette valeur. */
+  transform: translate(-50%, -50%); /* Centre le bloc sur le point (top, left) */
+
+  width: 30%; /* Largeur spécifique pour ce module */
+  max-width: 600px;
+  
+  /* IMPORTANT : Toutes les propriétés de style (padding, background-color, border-radius, etc.)
+     DOIVENT ÊTRE SUPPRIMÉES DE CETTE RÈGLE et se trouver uniquement dans '.project-description-common'. */
+}
+
+/* --- Styles communs à TOUTES les zones de texte descriptives --- */
+/* Cette règle DOIT contenir toutes les propriétés de style qui sont les mêmes pour tous vos modules de texte */
+/* Elle devrait déjà être dans votre CSS comme nous l'avons défini précédemment. */
+.project-description-common {
+  padding: 30px;
+  background-color: pink;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: 'lato', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+  z-index: 10000;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+/* Styles pour les paragraphes à l'intérieur des zones de texte communes */
+.project-description-common p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.project-description-common p:last-child {
+  margin-bottom: 0;
+}
+
+
+
+/* --- Styles pour le conteneur du module 20 --- */
+#mod20 {
+  position: relative; /* INDISPENSABLE pour positionner les hotspots en absolu à l'intérieur */
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Assurez-vous que le module est au-dessus de l'image de fond fixe */
+  background-color: pink;
+}
+
+#mod20 .module-image {
+  /* Assurez-vous que le conteneur de l'image est bien dimensionné */
+  width: 100%; /* Ou la largeur que vous souhaitez que l'image occupe dans le module */
+  height: 100%; /* Ou la hauteur que vous souhaitez que l'image occupe dans le module */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#mod20 .module-image img {
+  max-width: 100%; 
+  max-height: 100vh; 
+  object-fit: contain; 
+  display: block;
+  margin: auto; /* Centre l'image si elle est plus petite que son conteneur */
+  
+  /* AJOUTEZ CETTE LIGNE : L'image elle-même ne doit pas intercepter les clics */
+  pointer-events: none; 
+}
+
+/* --- Styles pour les zones cliquables (hotspots) --- */
+.contact-hotspot {
+  position: absolute; /* Positionnement par rapport à #mod20 */
+  cursor: pointer; /* Indique que c'est cliquable */
+  z-index: 10001; /* Doit être au-dessus de l'image et du module */
+  
+  /* AJOUTEZ CETTE LIGNE : S'assure que les hotspots sont cliquables même si un parent a pointer-events: none; */
+  pointer-events: auto; 
+}
+
+/* Positionnement spécifique de chaque hotspot (AJUSTEZ CES VALEURS !) */
+.hotspot-phone {
+  top: 63%;    /* Ajustez la position verticale */
+  left: 32%;   /* Ajustez la position horizontale */
+  width: 20%;  /* Ajustez la largeur de la zone cliquable (ex: 10% de #mod20) */
+  height: 15%; /* Ajustez la hauteur de la zone cliquable (ex: 5% de #mod20) */
+  transform: translate(-50%, -50%); /* Pour centrer le hotspot sur le point (top, left) */
+}
+
+.hotspot-email {
+  top: 63%;    /* Ajustez la position verticale */
+  left: 55%;   /* Ajustez la position horizontale */
+  width: 20%;  /* Ajustez la largeur */
+  height: 15%; /* Ajustez la hauteur */
+  transform: translate(-50%, -50%);
+}
+
+.hotspot-linkedin {
+  top: 63%;    /* Ajustez la position verticale */
+  left: 80%;   /* Ajustez la position horizontale */
+  width: 20%;  /* Ajustez la largeur */
+  height: 15%; /* Ajustez la hauteur */
+  transform: translate(-50%, -50%);
+}
+
+
+
